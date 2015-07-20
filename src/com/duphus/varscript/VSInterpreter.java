@@ -11,11 +11,7 @@ public class VSInterpreter {
 		VAL
 	}
 	
-	public ArrayList<VariableToken> Parse(String filename, ParseStyle style, boolean allowComments) throws Exception {
-		if (filename.substring(filename.indexOf('.')) != "var") {
-			throw new Exception("[VariableScript]: Bad Script Extension");
-		}
-		
+	public ArrayList<VariableToken> parse(String filename, ParseStyle style, boolean allowComments) throws Exception {
 		ArrayList<VariableToken> varList = new ArrayList<VariableToken>();
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), Charset.forName("UTF-8")));
@@ -52,5 +48,39 @@ public class VSInterpreter {
 			e.printStackTrace();
 		}
 		return varList;
+	}
+	
+	public boolean containsVariable(VariableToken variable, ArrayList<VariableToken> variables) {
+		return variables.contains(variable);
+	}
+	
+	public boolean getContainsVariable(String name, ArrayList<VariableToken> variables) {
+		for(VariableToken var : variables) {
+			if (var.name == name) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public VariableToken getVariableByName(String name, ArrayList<VariableToken> variables) {
+		for(VariableToken var : variables) {
+			if (var.name == name) {
+				return var;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<VariableToken> getAllVariablesWithValue(String value, ArrayList<VariableToken> variables) {
+		ArrayList<VariableToken> vars = new ArrayList<VariableToken>();
+		
+		for (VariableToken var : vars) {
+			if (var.value == value) {
+				vars.add(var);
+			}
+		}
+		
+		return vars;
 	}
 }

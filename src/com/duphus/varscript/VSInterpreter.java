@@ -14,6 +14,7 @@ public class VSInterpreter {
 	public ArrayList<VariableToken> parse(String filename, ParseStyle style, boolean allowComments) throws Exception {
 		ArrayList<VariableToken> varList = new ArrayList<VariableToken>();
 		try {
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), Charset.forName("UTF-8")));
 			String line;
 			int lineNumber = 0;
